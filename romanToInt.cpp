@@ -18,9 +18,6 @@ public:
            {
                y=y+roman_map[s[i]];
            }
-          
-
- 
         }
         return y;
 
