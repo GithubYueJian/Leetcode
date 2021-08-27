@@ -1,7 +1,8 @@
+
 class Solution {
 public:
     int max(int a,int b){return a>b? a:b;}
-    int lengthOfLongestSubstring(string s) {
+    /*int lengthOfLongestSubstring(string s) {
 
         unordered_set<char> lookup;
 
@@ -27,6 +28,30 @@ public:
         }
         if(lookup.size()!=0)
             length = max(length,lookup.size());
+
+        return length;
+
+    }
+    */
+
+    int lengthOfLongestSubstring(string s) {
+
+        unordered_set<char> lookup;
+
+        int length{0};
+        int left{0};
+
+        for(int i=0;i<s.size();++i)
+        {
+            while(lookup.find(s[i])!=lookup.end())
+            {
+                lookup.erase(s[left]);
+                ++left;
+            }
+            length = max(length,i-left+1);
+            lookup.insert(s[i]);
+        }
+
 
         return length;
 
