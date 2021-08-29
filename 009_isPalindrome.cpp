@@ -29,4 +29,29 @@ public:
         }
             return y;
     }
+    
+    /*
+    
+    bool isPalindrome(int x)
+     {  
+        if(x<0)
+            return false;
+        string s= to_string(x);
+        return string_isPalindrome(s);
+    }
+
+    bool string_isPalindrome(string s)
+    {
+        int i = 0, j = s.size() - 1;
+	while (i < j)
+	{
+		if (s[i] != s[j])
+			return false;
+		j--;
+		i++;
+	}
+	return true;
+    }
+    
+    */
 };
