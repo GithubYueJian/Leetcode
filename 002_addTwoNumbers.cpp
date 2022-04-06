@@ -10,49 +10,43 @@
  */
 class Solution {
 public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int up = 0;  //up 代表进位
-        int temp = 0;
-        ListNode* l3 = new ListNode(0);
-        ListNode* p = l3 ;
-        while(l1 && l2)
-        {
-            temp= (l1->val+l2->val+up)%10 ;
-            up  = (l1->val+l2->val+up)/10;
-            ListNode* newNode = new ListNode(temp);
-            p->next = newNode;
-            p = newNode;
-            l1 = l1->next;
-            l2 = l2->next;
-        }
-        while(l1)
-        {
-            temp = (l1->val + up)%10;
-            up = (l1->val + up)/10;
-            ListNode* newNode = new ListNode(temp);
-            p->next = newNode;
-            p = newNode;
-            l1 = l1->next;
-        }
-        while(l2)
-        {
-            temp = (l2->val + up)%10;
-            up = (l2->val + up)/10;
-            ListNode* newNode = new ListNode(temp);
-            p->next = newNode;
-            p = newNode;
-            l2 = l2->next;
-        }
-
-         if(up)
-        {
-            ListNode* newNode = new ListNode(up);
-            p->next = newNode;
-            p = newNode;
-        }
-
-
-        return l3->next;
-
+   ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    int carry(0);
+    ListNode* head = new ListNode(0);
+    ListNode* currentNode = head;
+    while (l1 && l2)
+    {
+        ListNode* newNode = new ListNode((l1->val + l2->val + carry) % 10);
+        carry = (l1->val + l2->val + carry) / 10;
+        currentNode->next = newNode;
+        l1 = l1->next;
+        l2 = l2->next;
+        currentNode = currentNode->next;
+        
     }
+    while (l1)
+    {
+        ListNode* newNode = new ListNode((l1->val + carry) % 10);
+        carry = ((l1->val + carry) / 10);
+        currentNode->next = newNode;
+        l1 = l1->next;
+        currentNode = currentNode->next;
+    }
+    while (l2)
+    {
+        ListNode* newNode = new ListNode((l2->val + carry) % 10);
+        carry = ((l2->val + carry) / 10);
+        currentNode->next = newNode;
+        l2 = l2->next;
+        currentNode = currentNode->next;
+    }
+    if (carry)
+    {
+        ListNode* newNode = new ListNode(carry);
+        currentNode->next = newNode;
+        currentNode = currentNode->next;
+    }
+    return head->next;
+
+}
 };
